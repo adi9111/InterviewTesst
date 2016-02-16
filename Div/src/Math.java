@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StreamTokenizer;
 import java.util.Scanner;
 
 
@@ -9,6 +10,7 @@ public class Math {
 	String Line = "";
 	 FileReader odczyt = null;
 	 String File="dane.txt";
+	 int wartosc=0;
 	
 	public void  ReadingFromTxt() 
 	{
@@ -18,6 +20,9 @@ public class Math {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 
+		
+		 
 		
 		 
 		
@@ -31,6 +36,7 @@ public class Math {
 		        if (ind >= 0) {
 		           String yourValue = Line.substring(ind+"70".length(), Line.length()-1).trim();
 		           System.out.println(yourValue);
+		           
 		          
 		        }
 		     }
@@ -39,6 +45,19 @@ public class Math {
 		        System.out.println("B£¥D ODCZYTU Z PLIKU!");
 		        System.exit(2);
 		   }
+		 StreamTokenizer st = new StreamTokenizer(odczyt);
+	     //ODCZYT KOLEJNYCH "TOKENÓW" Z PLIKU:
+	     try {
+	        while( (wartosc = st.nextToken()) != StreamTokenizer.TT_EOF ){
+	              if(wartosc == StreamTokenizer.TT_WORD)
+	                    System.out.println("Wczytano s³owo: "+ st.sval);
+	              else if(wartosc == StreamTokenizer.TT_NUMBER)  
+	                    System.out.println("Wczytano liczbê: "+ st.nval);
+	         }
+	      } catch (IOException e) {
+	            System.out.println("B£¥D ODCZYTU Z PLIKU!");
+	            System.exit(2);
+	      }
 		
 		 
 		 
